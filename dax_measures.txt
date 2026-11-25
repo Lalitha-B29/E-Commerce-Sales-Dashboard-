@@ -1,0 +1,29 @@
+// Power BI: load data/cleaned_sales_data.csv, then create these measures (Modeling > New measure)
+
+Total Sales = SUM(cleaned_sales_data[sales])
+
+Total Profit = SUM(cleaned_sales_data[profit])
+
+Profit Margin % = DIVIDE([Total Profit], [Total Sales], 0)
+
+Total Orders = DISTINCTCOUNT(cleaned_sales_data[order_id])
+
+Average Order Value = DIVIDE([Total Sales], [Total Orders], 0)
+
+Total Customers = DISTINCTCOUNT(cleaned_sales_data[customer_id])
+
+Units Sold = SUM(cleaned_sales_data[quantity])
+
+// Mark order_date as a date table column first (or use a Calendar table), then:
+Sales Last Year = CALCULATE([Total Sales], SAMEPERIODLASTYEAR(cleaned_sales_data[order_date]))
+
+YoY Growth % = DIVIDE([Total Sales] - [Sales Last Year], [Sales Last Year], 0)
+
+Sales YTD = TOTALYTD([Total Sales], cleaned_sales_data[order_date])
+
+// Suggested visuals:
+// Cards: Total Sales, Total Profit, Profit Margin %, Total Orders, Average Order Value
+// Line chart: month_num/month vs Total Sales, legend = year
+// Bar chart: category vs Total Sales; Clustered bar: Top 10 product_name by Total Sales
+// Map or bar: region vs Total Profit
+// Slicers: year, category, region
