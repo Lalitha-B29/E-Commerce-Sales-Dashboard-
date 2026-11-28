@@ -1,4 +1,4 @@
-# 🛒 Ecommerce Sales Dashboard
+# Ecommerce Sales Dashboard
 
 An end-to-end data analytics project: raw ecommerce sales data → cleaning in Python → analysis in SQL → interactive Power BI dashboard.
 
